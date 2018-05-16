@@ -1,0 +1,3 @@
+[submodule "kali-matir/skel"]
+	path = kali-matir/skel
+	url = https://github.com/Matir/skel.git
