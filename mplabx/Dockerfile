@@ -16,16 +16,15 @@ RUN curl -fSL -A "Mozilla/4.0" -o /tmp/xc8.run "http://www.microchip.com/mplabxc
         --netservername localhost --LicenseType FreeMode \
     && rm /tmp/xc8.run
 
-ENV MPLABX_VERSION 4.15
-
 # Download and install MPLAB X IDE
 # Use url: http://www.microchip.com/mplabx-ide-linux-installer to get the latest version
-RUN curl -fSL -A "Mozilla/4.0" -o /tmp/mplabx-installer.tar "http://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v${MPLABX_VERSION}-linux-installer.tar" \
+RUN curl -fSL -A "Mozilla/4.0" -o /tmp/mplabx-installer.tar \
+    "http://www.microchip.com/mplabx-ide-linux-installer" \
     && tar xf /tmp/mplabx-installer.tar && rm /tmp/mplabx-installer.tar \
-    && USER=root ./MPLABX-v${MPLABX_VERSION}-linux-installer.sh --nox11 \
+    && USER=root ./MPLABX-v*-linux-installer.sh --nox11 \
         -- --unattendedmodeui none --mode unattended \
-    && rm ./MPLABX-v${MPLABX_VERSION}-linux-installer.sh
+    && rm ./MPLABX-v*-linux-installer.sh
 
-VOLUME ["/tmp/.X11-unix"]
+VOLUME ["/tmp/.X11-unix", "/dev/bus/usb"]
 
 CMD ["/usr/bin/mplab_ide"]
